@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <style type="text/css">
+      body {
+      color: black;
+      font: 13.34px helvetica,arial,freesans,clean,sans-serif;
+      line-height: 1.4em;
+      margin: 10% 10% 10% 10%;
+      }
+      #next_step {
+      background-color: #EAF2F5;
+      border: 20px solid #DDDDDD;
+      margin: 3em auto 0;
+      padding: 2em 2em 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="next_step">
+  
+      <h2>Your token:</h2>
+
+      <pre>  {{ access_token }}</pre>
+
+      <h2>Next steps:</h2>
+
+      <pre>  git config --global github.token {{ access_token }}</pre>
+  
+</div>
+  </body>
+</html>

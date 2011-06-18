@@ -1,7 +1,9 @@
 from google.appengine.ext import webapp
+from google.appengine.ext.webapp import template
 from google.appengine.ext.webapp.util import run_wsgi_app
 from google.appengine.api.urlfetch import fetch
 
+import os
 import ConfigParser
 import urlparse
 
@@ -21,9 +23,14 @@ class AuthPage(webapp.RequestHandler):
         resp = fetch((gh_url + "access_token?client_id=%s&client_secret=%s&code=%s")
                      % (client_id, client_secret, code),
                      method="POST")
-        
         access_token = urlparse.parse_qs(resp.content)['access_token'][0]
-        print ">>>", access_token, "<<<"
+        
+        template_values = {
+            'access_token': access_token,
+        }
+
+        path = os.path.join(os.path.dirname(__file__), 'oauth.html')
+        self.response.out.write(template.render(path, template_values))
 
 application = webapp.WSGIApplication([('/', MainPage),
                                       ('/oauth', AuthPage)],
