@@ -23,7 +23,9 @@ class AuthPage(webapp.RequestHandler):
         resp = fetch((gh_url + "access_token?client_id=%s&client_secret=%s&code=%s")
                      % (client_id, client_secret, code),
                      method="POST")
-        access_token = urlparse.parse_qs(resp.content)['access_token'][0]
+
+        qs = dict([t.split("=") for t in resp.content.split("&")])
+        access_token = qs['access_token']
         
         template_values = {
             'access_token': access_token,
