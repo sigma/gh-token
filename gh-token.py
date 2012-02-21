@@ -14,7 +14,7 @@ gh_url = "https://github.com/login/oauth/"
 
 class MainPage(webapp.RequestHandler):
     def get(self):
-        self.redirect((gh_url + "authorize?client_id=%s&scope=%s") 
+        self.redirect((gh_url + "authorize?client_id=%s&scope=%s")
                       % (client_id, scope))
 
 class AuthPage(webapp.RequestHandler):
@@ -26,7 +26,7 @@ class AuthPage(webapp.RequestHandler):
 
         qs = dict([t.split("=") for t in resp.content.split("&")])
         access_token = qs['access_token']
-        
+
         template_values = {
             'access_token': access_token,
         }
@@ -45,7 +45,7 @@ def main():
     try:
         global client_id
         client_id = parser.get('main', 'client_id')
-        
+
         global client_secret
         client_secret = parser.get('main', 'client_secret')
 
